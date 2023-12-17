@@ -7,7 +7,7 @@
 
 ## 开发技术和规范记录
 - 练习项目，不一定是最简洁实用的方法
-- Unity 2022.3.14 LTS
+- Unity 2023.2.0f1c1
 - Input System
 - Sensor Toolkit 2
 - Cinemachine
