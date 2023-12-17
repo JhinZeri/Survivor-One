@@ -5,12 +5,17 @@ namespace PlayerCodes
 {
     public class SpriteControl : MonoBehaviour
     {
-        public SpriteRenderer playerSprite;
+        private SpriteRenderer m_playerSprite;
+
+        private Animator m_animator;
+
 
         private void Awake()
         {
-            playerSprite = GetComponent<SpriteRenderer>();
+            m_playerSprite = GetComponent<SpriteRenderer>();
+            m_animator = GetComponent<Animator>();
         }
+
 
         public void CorrectSpriteDirection(Vector2 moveInput)
         {
@@ -18,12 +23,30 @@ namespace PlayerCodes
 
             if (moveInput.x < 0)
             {
-                playerSprite.flipX = true;
+                m_playerSprite.flipX = true;
             }
 
             if (moveInput.x > 0)
             {
-                playerSprite.flipX = false;
+                m_playerSprite.flipX = false;
+            }
+        }
+
+        public void PlayAnimation(PlayerStates state)
+        {
+            switch (state)
+            {
+                case PlayerStates.Idle:
+                    m_animator.Play("Idle");
+                    break;
+                case PlayerStates.Run:
+                    m_animator.Play("Run");
+                    break;
+                case PlayerStates.Dead:
+                    m_animator.Play("Dead");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
         }
     }
