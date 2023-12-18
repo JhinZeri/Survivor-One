@@ -4,8 +4,16 @@ using UnityEngine.InputSystem;
 
 namespace PlayerCodes
 {
+    public enum PlayerStates
+    {
+        Idle,
+        Run,
+        Dead
+    }
+
     public class PlayerController : MonoBehaviour
     {
+        public PlayerStates playerState;
         public Vector2 moveVector2;
         public float speed;
 
@@ -13,8 +21,10 @@ namespace PlayerCodes
 
         private Rigidbody2D m_rigid;
 
+        [Header("子物体")] private SpriteControl m_spriteControl;
 
-        private SpriteControl m_spriteControl;
+        private SpriteRenderer m_shadow;
+
 
         private void Awake()
         {
@@ -25,6 +35,7 @@ namespace PlayerCodes
         private void Start()
         {
             m_spriteControl = GetComponentInChildren<SpriteControl>();
+            m_shadow = transform.GetChild(1).GetComponent<SpriteRenderer>();
         }
 
         private void OnEnable()
@@ -47,7 +58,39 @@ namespace PlayerCodes
         void Update()
         {
             moveVector2 = m_input.currentActionMap.FindAction("Move").ReadValue<Vector2>();
+            SwitchState();
             m_spriteControl.CorrectSpriteDirection(moveVector2);
+            m_spriteControl.PlayAnimation(playerState);
+
+            if (playerState == PlayerStates.Dead)
+            {
+                m_shadow.gameObject.SetActive(false);
+            }
+            else
+            {
+                m_shadow.gameObject.SetActive(true);
+            }
+        }
+
+        private void SwitchState()
+        {
+            if (Keyboard.current.oKey.wasPressedThisFrame)
+            {
+                playerState = PlayerStates.Dead;
+                return;
+            }
+
+            if (playerState != PlayerStates.Dead)
+            {
+                playerState = moveVector2 == Vector2.zero ? PlayerStates.Idle : PlayerStates.Run;
+            }
+            else
+            {
+                if (Keyboard.current.pKey.wasPressedThisFrame)
+                {
+                    playerState = PlayerStates.Idle;
+                }
+            }
         }
     }
 }
