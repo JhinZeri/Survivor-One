@@ -17,21 +17,26 @@ namespace PlayerCodes
         }
 
 
-        public void CorrectSpriteDirection(Vector2 moveInput)
+        /// <summary>
+        /// 切换图片方向
+        /// </summary>
+        /// <param name="moveSpeed">速度Vector2</param>
+        public void CorrectSpriteDirection(Vector2 moveSpeed)
         {
-            if (moveInput.x == 0) return;
+            if (moveSpeed.x == 0) return;
 
-            if (moveInput.x < 0)
+            if (moveSpeed.x < 0)
             {
                 m_playerSprite.flipX = true;
             }
 
-            if (moveInput.x > 0)
+            if (moveSpeed.x > 0)
             {
                 m_playerSprite.flipX = false;
             }
         }
 
+        
         public void PlayAnimation(PlayerStates state)
         {
             switch (state)

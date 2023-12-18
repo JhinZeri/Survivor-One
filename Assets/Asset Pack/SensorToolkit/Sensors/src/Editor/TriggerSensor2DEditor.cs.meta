@@ -15,5 +15,5 @@ AssetOrigin:
   productId: 205336
   packageName: SensorToolkit 2
   packageVersion: 2.5.10
-  assetPath: Assets/SensorToolkit/Sensors/src/Editor/TriggerSensor2DEditor.cs
+  assetPath: Assets/Asset Pack/SensorToolkit/Sensors/src/Editor/TriggerSensor2DEditor.cs
   uploadId: 628989

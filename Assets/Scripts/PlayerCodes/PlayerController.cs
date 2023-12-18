@@ -21,9 +21,9 @@ namespace PlayerCodes
 
         private Rigidbody2D m_rigid;
 
-        [Header("子物体")] private SpriteControl m_spriteControl;
+        [Header("子物体")] public SpriteControl spriteControl;
 
-        private SpriteRenderer m_shadow;
+        public SpriteRenderer shadow;
 
 
         private void Awake()
@@ -32,11 +32,6 @@ namespace PlayerCodes
             m_rigid = GetComponent<Rigidbody2D>();
         }
 
-        private void Start()
-        {
-            m_spriteControl = GetComponentInChildren<SpriteControl>();
-            m_shadow = transform.GetChild(1).GetComponent<SpriteRenderer>();
-        }
 
         private void OnEnable()
         {
@@ -58,20 +53,25 @@ namespace PlayerCodes
         void Update()
         {
             moveVector2 = m_input.currentActionMap.FindAction("Move").ReadValue<Vector2>();
+
             SwitchState();
-            m_spriteControl.CorrectSpriteDirection(moveVector2);
-            m_spriteControl.PlayAnimation(playerState);
+
+            spriteControl.CorrectSpriteDirection(moveVector2);
+            spriteControl.PlayAnimation(playerState);
 
             if (playerState == PlayerStates.Dead)
             {
-                m_shadow.gameObject.SetActive(false);
+                shadow.gameObject.SetActive(false);
             }
             else
             {
-                m_shadow.gameObject.SetActive(true);
+                shadow.gameObject.SetActive(true);
             }
         }
 
+        /// <summary>
+        /// 切换角色状态
+        /// </summary>
         private void SwitchState()
         {
             if (Keyboard.current.oKey.wasPressedThisFrame)
