@@ -5,6 +5,10 @@
 - Youtube视频合集：[유니티 기초 뱀서라이크🧟언데드서바이버](https://www.youtube.com/playlist?list=PLO-mt5Iu5TeZF8xMHqtT_DhAPKmjF6i3x)
 - 项目阶段一目标为参考其思路，根据个人习惯开发，完成教程包含的功能内容
 
+## 已使用免费素材链接
+
+- 像素幸存者资源包：[https://assetstore.unity.com/packages/2d/undead-survivor-assets-pack-238068](https://assetstore.unity.com/packages/2d/undead-survivor-assets-pack-238068)
+- 像素水果资源包：[https://assetstore.unity.com/packages/2d/gui/icons/2d-pixel-art-icons-fruits-258332](https://assetstore.unity.com/packages/2d/gui/icons/2d-pixel-art-icons-fruits-258332)
 ## 开发技术和规范记录
 
 - 练习项目，不一定是最简洁实用的方法
