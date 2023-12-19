@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,6 +31,8 @@ namespace PlayerCodes
         {
             m_input = GetComponent<PlayerInput>();
             m_rigid = GetComponent<Rigidbody2D>();
+
+            // GameManager.Instance.playerControl = this;
         }
 
 
