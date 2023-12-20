@@ -1,15 +1,17 @@
 using System;
 using Managers;
 using Micosmo.SensorToolkit;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace EnemyCodes
 {
     public class EnemyController : MonoBehaviour
     {
+        public EnemyDataSO enemyDataSoTemplate;
         public GamePhase phase;
         public Rigidbody2D targetPlayer;
-        public float speed;
+        public RangeSensor2D bodyRangeSensor;
 
         private Rigidbody2D m_rigid;
 
@@ -18,12 +20,13 @@ namespace EnemyCodes
         private bool m_isLive = true;
         private bool m_isContactPlayer;
 
-        public RangeSensor2D bodyRangeSensor;
+        public EnemyDataSO enemyData;
 
         private void Awake()
         {
             m_rigid = GetComponent<Rigidbody2D>();
             m_sprite = GetComponent<SpriteRenderer>();
+            enemyData = Instantiate(enemyDataSoTemplate);
         }
 
 
@@ -93,7 +96,7 @@ namespace EnemyCodes
                 return;
             }
 
-            m_rigid.velocity = speed * Time.fixedDeltaTime * dir;
+            m_rigid.velocity = enemyData.speed * Time.fixedDeltaTime * dir;
 
             CorrectDirection();
         }

@@ -1,5 +1,6 @@
 using System;
 using Managers;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,7 @@ namespace PlayerCodes
 
     public class PlayerController : MonoBehaviour
     {
+        public PlayerDataSO playerData;
         public PlayerStates playerState;
         public Vector2 moveVector2;
         public float speed;
@@ -26,12 +28,12 @@ namespace PlayerCodes
 
         public SpriteRenderer shadow;
 
-
         private void Awake()
         {
             m_input = GetComponent<PlayerInput>();
             m_rigid = GetComponent<Rigidbody2D>();
 
+            speed = playerData.speed;
             // GameManager.Instance.playerControl = this;
         }
 

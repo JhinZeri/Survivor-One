@@ -294,7 +294,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 0.8}
+  m_Size: {x: 0.6, y: 1}
   m_Direction: 0
 --- !u!114 &3358830087295649830
 MonoBehaviour:
@@ -308,10 +308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6679e70113337964098477161ce0cbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDataSoTemplate: {fileID: 11400000, guid: 784ce1453a338e547a6ef00ef1b73482, type: 2}
   phase: 1
   targetPlayer: {fileID: 0}
-  speed: 70
   bodyRangeSensor: {fileID: 5413318295884351103}
+  enemyData: {fileID: 0}
 --- !u!1 &5730415110989248077
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,8 +382,8 @@ MonoBehaviour:
   Box:
     HalfExtents: {x: 0.5, y: 0.5}
   Capsule:
-    Radius: 0.25
-    Height: 0.8
+    Radius: 0.3
+    Height: 1
   DetectsOnLayers:
     serializedVersion: 2
     m_Bits: 1

@@ -1,6 +1,8 @@
+using System;
 using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 
 namespace EnemyCodes
@@ -13,16 +15,25 @@ namespace EnemyCodes
 
         public float timer;
 
+        public int[] spawnFrequencyTableSec;
+
+
+        private void OnEnable()
+        {
+            GameManager.Instance.gameLevelUp.AddListener(RefreshSpawnTimer);
+        }
+
+       
 
         // Update is called once per frame
         void Update()
         {
             timer += Time.deltaTime;
 
-            if (timer >= 1f)
+            if (timer >= spawnFrequencyTableSec[GameManager.Instance.gameLevel])
             {
                 timer = 0f;
-                RandomEnemySpawn();
+                EnemySpawn();
             }
             // if (Keyboard.current.spaceKey.wasPressedThisFrame)
             // {
@@ -30,18 +41,23 @@ namespace EnemyCodes
             // }
         }
 
-        public Vector2 RandomPosition()
+        private Vector2 RandomPosition()
         {
             var ran = Random.Range(0, portals.Length);
             return portals[ran].position;
         }
 
-        private void RandomEnemySpawn()
+        private void EnemySpawn()
         {
-            var enemy = GameManager.Instance.pool.Spawn(Random.Range(0, 2));
+            var enemy = GameManager.Instance.pool.Spawn(GameManager.Instance.gameLevel);
             enemy.transform.SetParent(enemyParent);
             enemy.transform.position = RandomPosition();
             enemy.GetComponent<EnemyController>().InitRecycle();
+        }
+
+        private void RefreshSpawnTimer()
+        {
+            timer = 0f;
         }
     }
 }
