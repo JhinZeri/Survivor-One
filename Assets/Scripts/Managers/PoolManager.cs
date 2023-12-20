@@ -24,7 +24,7 @@ namespace Managers
                 m_objectPoolLists[index] = new List<GameObject>();
             }
 
-            Debug.Log(m_objectPoolLists.Length);
+            // Debug.Log(m_objectPoolLists.Length);
         }
 
 
@@ -38,28 +38,15 @@ namespace Managers
                 {
                     select = obj;
 
-                    if (select.CompareTag("Enemy"))
-                    {
-                        select.GetComponent<EnemyController>().InitRecycle();
-                    }
-
                     select.SetActive(true);
+                    
                     break;
                 }
             }
 
             if (!select)
             {
-                if (recyclablePrefabs[index].CompareTag("Enemy"))
-                {
-                    select = Instantiate(recyclablePrefabs[index], GameManager.Instance.enemyFactory.enemyParent, true);
-                    select.GetComponent<EnemyController>().InitRecycle();
-                    // select.transform.SetParent(GameManager.Instance.enemyFactory.enemyParent.transform, true);
-                }
-                else
-                {
-                    select = Instantiate(recyclablePrefabs[index]);
-                }
+                select = Instantiate(recyclablePrefabs[index]);
 
                 m_objectPoolLists[index].Add(select);
             }
@@ -76,10 +63,6 @@ namespace Managers
                 poolLength[index] = m_objectPoolLists[index].Count;
             }
         }
-
-        private GameObject TryEnemySpawn(GameObject enemy)
-        {
-            return enemy;
-        }
+        
     }
 }

@@ -55,7 +55,6 @@ namespace EnemyCodes
         /// </summary>
         public void InitRecycle()
         {
-            m_rigid.position = GameManager.Instance.enemyFactory.RandomPosition();
             targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
         }
 
@@ -104,7 +103,6 @@ namespace EnemyCodes
         /// </summary>
         private void CorrectDirection()
         {
-            
             if (m_rigid.velocity.x == 0) return;
 
             if (m_rigid.velocity.x < 0)

@@ -38,7 +38,10 @@ namespace EnemyCodes
 
         private void RandomEnemySpawn()
         {
-            GameManager.Instance.pool.Spawn(Random.Range(0, GameManager.Instance.pool.recyclablePrefabs.Length));
+            var enemy = GameManager.Instance.pool.Spawn(Random.Range(0, 2));
+            enemy.transform.SetParent(enemyParent);
+            enemy.transform.position = RandomPosition();
+            enemy.GetComponent<EnemyController>().InitRecycle();
         }
     }
 }
