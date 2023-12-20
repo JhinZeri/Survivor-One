@@ -13,12 +13,19 @@ namespace PlayerCodes
         Dead
     }
 
+    [System.Serializable]
+    public class PlayerRuntimeData
+    {
+        public int currentHealth;
+        public int currentSpeed;
+    }
+
     public class PlayerController : MonoBehaviour
     {
+        public PlayerRuntimeData runtimeData;
         public PlayerDataSO playerData;
         public PlayerStates playerState;
         public Vector2 moveVector2;
-        public float speed;
 
         private PlayerInput m_input;
 
@@ -33,10 +40,10 @@ namespace PlayerCodes
             m_input = GetComponent<PlayerInput>();
             m_rigid = GetComponent<Rigidbody2D>();
 
-            speed = playerData.speed;
+            runtimeData.currentSpeed = playerData.initialSpeed;
+            runtimeData.currentHealth = playerData.maxHealth;
             // GameManager.Instance.playerControl = this;
         }
-
 
         private void OnEnable()
         {
@@ -51,7 +58,7 @@ namespace PlayerCodes
 
         private void FixedUpdate()
         {
-            m_rigid.velocity = moveVector2 * (speed * Time.fixedDeltaTime);
+            m_rigid.velocity = moveVector2 * (runtimeData.currentSpeed * Time.fixedDeltaTime);
         }
 
         // Update is called once per frame

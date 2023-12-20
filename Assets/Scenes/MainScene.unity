@@ -2361,10 +2361,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4721d8f173a345f46ac52badcf884649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runtimeData:
+    currentHealth: 0
+    currentSpeed: 0
   playerData: {fileID: 11400000, guid: cdc86904023898b4f8ff1f981351f3bd, type: 2}
   playerState: 0
   moveVector2: {x: 0, y: 0}
-  speed: 100
   spriteControl: {fileID: 2098879641}
   shadow: {fileID: 421225424}
 --- !u!50 &747766368

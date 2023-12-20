@@ -6,9 +6,17 @@ using UnityEngine;
 
 namespace EnemyCodes
 {
+    [Serializable]
+    public class EnemyRuntimeData
+    {
+        public int currentHealth;
+        public int currentSpeed;
+    }
+
     public class EnemyController : MonoBehaviour
     {
         public EnemyDataSO enemyDataSoTemplate;
+        public EnemyRuntimeData runtimeData;
         public GamePhase phase;
         public Rigidbody2D targetPlayer;
         public RangeSensor2D bodyRangeSensor;
@@ -20,13 +28,13 @@ namespace EnemyCodes
         private bool m_isLive = true;
         private bool m_isContactPlayer;
 
-        public EnemyDataSO enemyData;
 
         private void Awake()
         {
             m_rigid = GetComponent<Rigidbody2D>();
             m_sprite = GetComponent<SpriteRenderer>();
-            enemyData = Instantiate(enemyDataSoTemplate);
+
+            DataInit();
         }
 
 
@@ -59,6 +67,13 @@ namespace EnemyCodes
         public void InitRecycle()
         {
             targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
+            DataInit();
+        }
+
+        public void DataInit()
+        {
+            runtimeData.currentSpeed = enemyDataSoTemplate.speed;
+            runtimeData.currentHealth = enemyDataSoTemplate.maxHealth;
         }
 
 
@@ -96,7 +111,7 @@ namespace EnemyCodes
                 return;
             }
 
-            m_rigid.velocity = enemyData.speed * Time.fixedDeltaTime * dir;
+            m_rigid.velocity = runtimeData.currentSpeed * Time.fixedDeltaTime * dir;
 
             CorrectDirection();
         }
