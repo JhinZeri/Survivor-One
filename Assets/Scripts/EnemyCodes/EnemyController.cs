@@ -11,6 +11,7 @@ namespace EnemyCodes
     {
         public int currentHealth;
         public int currentSpeed;
+        public float currentHitCooldown;
     }
 
     public class EnemyController : MonoBehaviour
@@ -20,6 +21,8 @@ namespace EnemyCodes
         public GamePhase phase;
         public Rigidbody2D targetPlayer;
         public RangeSensor2D bodyRangeSensor;
+        public float hitTime;
+        public bool isOnHit;
 
         private Rigidbody2D m_rigid;
 
@@ -38,9 +41,9 @@ namespace EnemyCodes
         }
 
 
-        // Start is called before the first frame update
         void Start()
         {
+            phase = GameManager.Instance.phase;
             // targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
         }
 
@@ -51,6 +54,16 @@ namespace EnemyCodes
             if (phase == GamePhase.Dev)
             {
                 LockTarget();
+            }
+
+            if (isOnHit)
+            {
+                hitTime += Time.deltaTime;
+            }
+
+            if (hitTime >= runtimeData.currentHitCooldown)
+            {
+                isOnHit = false;
             }
         }
 
@@ -67,6 +80,8 @@ namespace EnemyCodes
         public void InitRecycle()
         {
             targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
+            m_isLive = true;
+            isOnHit = false;
             DataInit();
         }
 
@@ -74,8 +89,25 @@ namespace EnemyCodes
         {
             runtimeData.currentSpeed = enemyDataSoTemplate.speed;
             runtimeData.currentHealth = enemyDataSoTemplate.maxHealth;
+            runtimeData.currentHitCooldown = enemyDataSoTemplate.hitCooldown;
         }
 
+        public void InHit(int underDamage)
+        {
+            isOnHit = true;
+            runtimeData.currentHealth -= underDamage;
+
+            if (runtimeData.currentHealth <= 0)
+            {
+                m_isLive = false;
+                Dead();
+            }
+        }
+
+        public void Dead()
+        {
+            gameObject.SetActive(false);
+        }
 
         /// <summary>
         /// 锁定目标,Dev模式

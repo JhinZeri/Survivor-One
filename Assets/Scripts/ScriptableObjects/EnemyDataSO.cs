@@ -7,5 +7,6 @@ namespace ScriptableObjects
     {
         public int speed;
         public int maxHealth;
+        public float hitCooldown;
     }
 }
