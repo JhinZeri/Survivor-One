@@ -56,6 +56,18 @@ namespace Managers
             return select;
         }
 
+        public void DeSpawn(GameObject obj)
+        {
+            if (obj.activeSelf)
+            {
+                if (obj.GetComponent<Rigidbody2D>())
+                {
+                    obj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                }
+                obj.SetActive(false);
+            }
+            
+        }
         private void UpdatePoolLength()
         {
             for (int index = 0; index < m_objectPoolLists.Length; index++)

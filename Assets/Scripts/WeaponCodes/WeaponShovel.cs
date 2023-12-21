@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace WeaponCodes
 {
     public class WeaponShovel : Weapon
     {
+        [Header("Shovel Property")] public int rotateSpeedSec;
+
         private void Start()
         {
             ResetBulletShovel();
@@ -14,17 +17,37 @@ namespace WeaponCodes
         // Update is called once per frame
         void Update()
         {
-            transform.Rotate(Vector3.back * (150 * Time.deltaTime));
+            // 此时本地和世界坐标系一样，所以第二个参数不影响结果
+            transform.Rotate(Vector3.back * (rotateSpeedSec * Time.deltaTime));
+
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                weaponLevel += 1;
+                count += 1;
+                weaponLevelUp?.Invoke();
+            }
         }
 
         private void ResetBulletShovel()
         {
+            if (transform.childCount > 0)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    GameManager.Instance.pool.DeSpawn(transform.GetChild(i).gameObject);
+                }
+            }
+
             for (int index = 0; index < count; index++)
             {
-                var bullet = GameManager.Instance.pool.Spawn(2).transform;
+                var bullet = GameManager.Instance.pool.Spawn(prefabId).transform;
                 bullet.transform.SetParent(transform);
+
+                bullet.localPosition = Vector3.zero;
+                bullet.localRotation = Quaternion.identity;
+
                 var rot = 360 / count;
-                bullet.Rotate(Vector3.forward * index * rot);
+                bullet.Rotate(Vector3.back * index * rot);
                 bullet.Translate(bullet.up * 1.5f, Space.World);
             }
         }

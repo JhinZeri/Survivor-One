@@ -21,8 +21,6 @@ namespace EnemyCodes
         public GamePhase phase;
         public Rigidbody2D targetPlayer;
         public RangeSensor2D bodyRangeSensor;
-        public float hitTime;
-        public bool isOnHit;
 
         private Rigidbody2D m_rigid;
 
@@ -55,16 +53,6 @@ namespace EnemyCodes
             {
                 LockTarget();
             }
-
-            if (isOnHit)
-            {
-                hitTime += Time.deltaTime;
-            }
-
-            if (hitTime >= runtimeData.currentHitCooldown)
-            {
-                isOnHit = false;
-            }
         }
 
         private void FixedUpdate()
@@ -81,7 +69,6 @@ namespace EnemyCodes
         {
             targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
             m_isLive = true;
-            isOnHit = false;
             DataInit();
         }
 
@@ -92,9 +79,8 @@ namespace EnemyCodes
             runtimeData.currentHitCooldown = enemyDataSoTemplate.hitCooldown;
         }
 
-        public void InHit(int underDamage)
+        public void UnderHit(int underDamage)
         {
-            isOnHit = true;
             runtimeData.currentHealth -= underDamage;
 
             if (runtimeData.currentHealth <= 0)
@@ -104,9 +90,9 @@ namespace EnemyCodes
             }
         }
 
-        public void Dead()
+        private void Dead()
         {
-            gameObject.SetActive(false);
+            GameManager.Instance.pool.DeSpawn(gameObject);
         }
 
         /// <summary>

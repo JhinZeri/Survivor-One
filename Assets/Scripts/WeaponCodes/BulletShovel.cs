@@ -1,25 +1,16 @@
 using EnemyCodes;
+using Micosmo.SensorToolkit;
 using UnityEngine;
 
 namespace WeaponCodes
 {
     public class BulletShovel : Bullet
     {
-        // Update is called once per frame
-        void Update()
+
+        public void HitEnemy(GameObject enemyObj, Sensor sensor)
         {
-            bodyRange.Pulse();
-            if (bodyRange.GetNearestDetection())
-            {
-                foreach (var enemyObj in bodyRange.GetDetections())
-                {
-                    var enemy = enemyObj.GetComponent<EnemyController>();
-                    if (!enemy.isOnHit)
-                    {
-                        enemy.InHit(damage);
-                    }
-                }
-            }
+            var enemy = enemyObj.GetComponent<EnemyController>();
+            enemy.UnderHit(damage);
         }
     }
 }
