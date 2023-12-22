@@ -23,7 +23,6 @@ namespace EnemyCodes
             GameManager.Instance.gameLevelUp.AddListener(RefreshSpawnTimer);
         }
 
-       
 
         // Update is called once per frame
         void Update()
@@ -49,9 +48,11 @@ namespace EnemyCodes
 
         private void EnemySpawn()
         {
-            var enemy = GameManager.Instance.pool.Spawn(GameManager.Instance.gameLevel);
+            var enemy = GameManager.Instance.pool.Spawn(GameManager.Instance.gameLevel, new Vector2(1000, 1000));
+            enemy.SetActive(false);
             enemy.transform.SetParent(enemyParent);
             enemy.transform.position = RandomPosition();
+            enemy.SetActive(true);
             enemy.GetComponent<EnemyController>().InitRecycle();
         }
 

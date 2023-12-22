@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 802161855366864605}
   - component: {fileID: 7129730054343086693}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPotal 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1710671518257497242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18, y: 0, z: 0}
+  m_LocalPosition: {x: 17, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4942978948867753766}
   - component: {fileID: 2123296870359037422}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPotal 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 2621193735854706679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -13, z: 0}
+  m_LocalPosition: {x: 0, y: -12, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 754252532389494868}
   - component: {fileID: 8993311365354408549}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPortals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9080174798424674969}
   - component: {fileID: 7316205752472580027}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPotal 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 8181726413113277399}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 13, z: 0}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -324,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5167982602766570378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760597329508482711}
   - component: {fileID: 978137662751946569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPotal 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 9007259346677356566}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18, y: 0, z: 0}
+  m_LocalPosition: {x: -17, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []

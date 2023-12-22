@@ -7,6 +7,8 @@ namespace Managers
 {
     public class PoolManager : MonoBehaviour
     {
+        public Transform unlimitedPoint;
+
         public GameObject[] recyclablePrefabs;
 
         private List<GameObject>[] m_objectPoolLists;
@@ -39,7 +41,7 @@ namespace Managers
                     select = obj;
 
                     select.SetActive(true);
-                    
+
                     break;
                 }
             }
@@ -47,6 +49,94 @@ namespace Managers
             if (!select)
             {
                 select = Instantiate(recyclablePrefabs[index]);
+
+                m_objectPoolLists[index].Add(select);
+            }
+
+            UpdatePoolLength();
+
+            return select;
+        }
+
+        public GameObject Spawn(int index, Transform parent)
+        {
+            GameObject select = null;
+
+            foreach (var obj in m_objectPoolLists[index])
+            {
+                if (!obj.activeSelf)
+                {
+                    select = obj;
+
+                    select.SetActive(true);
+
+                    break;
+                }
+            }
+
+            if (!select)
+            {
+                select = Instantiate(recyclablePrefabs[index], parent);
+
+                m_objectPoolLists[index].Add(select);
+            }
+
+            UpdatePoolLength();
+
+            return select;
+        }
+
+        public GameObject Spawn(int index, Vector3 position)
+        {
+            GameObject select = null;
+
+            foreach (var obj in m_objectPoolLists[index])
+            {
+                if (!obj.activeSelf)
+                {
+                    select = obj;
+
+                    select.transform.position = position;
+
+                    select.SetActive(true);
+
+                    break;
+                }
+            }
+
+            if (!select)
+            {
+                select = Instantiate(recyclablePrefabs[index], position, Quaternion.identity);
+
+                m_objectPoolLists[index].Add(select);
+            }
+
+            UpdatePoolLength();
+
+            return select;
+        }
+
+        public GameObject Spawn(int index, Transform parent, Vector3 position)
+        {
+            GameObject select = null;
+
+            foreach (var obj in m_objectPoolLists[index])
+            {
+                if (!obj.activeSelf)
+                {
+                    select = obj;
+
+                    select.transform.position = position;
+
+                    select.SetActive(true);
+
+                    break;
+                }
+            }
+
+            if (!select)
+            {
+                select = Instantiate(recyclablePrefabs[index], position, Quaternion.identity, parent);
 
                 m_objectPoolLists[index].Add(select);
             }
@@ -64,10 +154,12 @@ namespace Managers
                 {
                     obj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
+
                 obj.SetActive(false);
+                obj.transform.position = unlimitedPoint.position;
             }
-            
         }
+
         private void UpdatePoolLength()
         {
             for (int index = 0; index < m_objectPoolLists.Length; index++)
@@ -75,6 +167,5 @@ namespace Managers
                 poolLength[index] = m_objectPoolLists[index].Count;
             }
         }
-        
     }
 }

@@ -1,11 +1,11 @@
-using System;
 using System.Collections.Generic;
 using EnemyCodes;
+using Micosmo.SensorToolkit;
 using PlayerCodes;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using Utility;
+
 
 public enum GamePhase
 {
@@ -18,20 +18,22 @@ namespace Managers
     public class GameManager : Singleton<GameManager>
     {
         public GamePhase phase;
-        
+
         public float gameTime;
         public float maxGameTime = 2 * 10f;
         public int gameLevel = 0;
-        
+
         public PlayerController playerControl;
         public PoolManager pool;
         public EnemyFactory enemyFactory;
-        
+        public RangeSensor2D recycleSensor;
+
         public int[] levelTimeTableSec;
         public GameObject[] gameInitPrefabs;
         public List<GameObject> runtimeGameObjects;
 
         public UnityEvent gameLevelUp;
+
 
         protected override void Awake()
         {
@@ -85,5 +87,6 @@ namespace Managers
 
             base.OnDestroy();
         }
+        
     }
 }

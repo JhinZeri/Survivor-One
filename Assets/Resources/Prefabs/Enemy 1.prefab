@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6547855932186542352}
   - component: {fileID: 1455097530691681816}
   - component: {fileID: 711540166603233128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -194,6 +194,7 @@ MonoBehaviour:
   runtimeData:
     currentHealth: 0
     currentSpeed: 0
+    currentHitCooldown: 0
   phase: 1
   targetPlayer: {fileID: 0}
   bodyRangeSensor: {fileID: 5647306082147572495}
@@ -207,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6290782922229017396}
   - component: {fileID: 5647306082147572495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BodyRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8026993507732381952}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6230864971564225181}
   - component: {fileID: 6841960147330468180}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

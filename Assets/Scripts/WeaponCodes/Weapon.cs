@@ -6,7 +6,7 @@ namespace WeaponCodes
     public abstract class Weapon : MonoBehaviour
     {
         [Header("Events")] public UnityEvent weaponLevelUp;
-        
+
         public int id;
 
         public int prefabId;
@@ -14,5 +14,7 @@ namespace WeaponCodes
         public int count;
 
         public int weaponLevel;
+
+        protected abstract void LevelUp();
     }
 }

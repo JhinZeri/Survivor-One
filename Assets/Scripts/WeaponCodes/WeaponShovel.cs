@@ -13,18 +13,18 @@ namespace WeaponCodes
         {
             ResetBulletShovel();
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
             // 此时本地和世界坐标系一样，所以第二个参数不影响结果
             transform.Rotate(Vector3.back * (rotateSpeedSec * Time.deltaTime));
 
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (GameManager.Instance.phase == GamePhase.Dev)
             {
-                weaponLevel += 1;
-                count += 1;
-                weaponLevelUp?.Invoke();
+                if (Keyboard.current.spaceKey.wasPressedThisFrame)
+                {
+                    LevelUp();
+                }
             }
         }
 
@@ -50,6 +50,13 @@ namespace WeaponCodes
                 bullet.Rotate(Vector3.back * index * rot);
                 bullet.Translate(bullet.up * 1.5f, Space.World);
             }
+        }
+
+        protected override void LevelUp()
+        {
+            weaponLevel += 1;
+            count += 1;
+            weaponLevelUp?.Invoke();
         }
     }
 }
