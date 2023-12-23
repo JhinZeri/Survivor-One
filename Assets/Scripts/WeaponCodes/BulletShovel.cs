@@ -10,7 +10,7 @@ namespace WeaponCodes
         public void HitEnemy(GameObject enemyObj, Sensor sensor)
         {
             var enemy = enemyObj.GetComponent<EnemyController>();
-            enemy.UnderHit(damage);
+            enemy.UnderHit(damage,force);
         }
     }
 }

@@ -2622,7 +2622,6 @@ MonoBehaviour:
   gameTime: 0
   maxGameTime: 20
   gameLevel: 0
-  playerControl: {fileID: 747766366}
   pool: {fileID: 1270433411}
   enemyFactory: {fileID: 0}
   recycleSensor: {fileID: 0}
@@ -2630,6 +2629,10 @@ MonoBehaviour:
   gameInitPrefabs:
   - {fileID: 5311331167602638355, guid: d29a191d4fae15248b39f143b38a094d, type: 3}
   runtimeGameObjects: []
+  playerLevelUpExpTable: 050000000f0000001e0000003c000000
+  playerControl: {fileID: 747766366}
+  killCount: 0
+  playerExp: 0
   gameLevelUp:
     m_PersistentCalls:
       m_Calls: []

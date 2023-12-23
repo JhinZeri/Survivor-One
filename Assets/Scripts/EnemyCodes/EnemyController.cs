@@ -20,21 +20,29 @@ namespace EnemyCodes
         public EnemyRuntimeData runtimeData;
         public GamePhase phase;
         public Rigidbody2D targetPlayer;
+        public Animator anim;
         public RangeSensor2D bodyRangeSensor;
 
+
+        private Collider2D m_coll;
         private Rigidbody2D m_rigid;
 
         private SpriteRenderer m_sprite;
 
         private bool m_isLive = true;
         private bool m_isContactPlayer;
+        private bool m_isOnHit;
+
+        private static readonly int Hit = Animator.StringToHash("hit");
+        private static readonly int Dead1 = Animator.StringToHash("dead");
 
 
         private void Awake()
         {
             m_rigid = GetComponent<Rigidbody2D>();
             m_sprite = GetComponent<SpriteRenderer>();
-
+            m_coll = GetComponent<Collider2D>();
+            anim = GetComponent<Animator>();
             DataInit();
         }
 
@@ -58,9 +66,18 @@ namespace EnemyCodes
         private void FixedUpdate()
         {
             if (!m_isLive) return;
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
             FollowTarget();
         }
 
+        private void OnEnable()
+        {
+            m_isLive = true;
+            anim.SetBool(Dead1, false);
+            m_coll.enabled = true;
+            m_rigid.simulated = true;
+            m_sprite.sortingOrder = 2;
+        }
 
         /// <summary>
         /// 敌人初始化，锁定敌人
@@ -68,29 +85,44 @@ namespace EnemyCodes
         public void InitRecycle()
         {
             targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
-            m_isLive = true;
             DataInit();
         }
 
-        public void DataInit()
+        private void DataInit()
         {
             runtimeData.currentSpeed = enemyDataSoTemplate.speed;
             runtimeData.currentHealth = enemyDataSoTemplate.maxHealth;
             runtimeData.currentHitCooldown = enemyDataSoTemplate.hitCooldown;
         }
 
-        public void UnderHit(int underDamage)
+        public void UnderHit(int underDamage, float force)
         {
             runtimeData.currentHealth -= underDamage;
 
-            if (runtimeData.currentHealth <= 0)
+            if (runtimeData.currentHealth >= 0)
+            {
+                anim.SetTrigger(Hit);
+                m_rigid.velocity = Vector2.zero;
+                if (force > 0)
+                {
+                    var playerPos = targetPlayer.position;
+                    var dir = ((Vector2)transform.position - playerPos).normalized;
+                    m_rigid.AddForce(dir * force, ForceMode2D.Impulse);
+                }
+            }
+            else
             {
                 m_isLive = false;
-                Dead();
+                anim.SetBool(Dead1, true);
+                m_coll.enabled = false;
+                m_rigid.simulated = false;
+                m_sprite.sortingOrder = 1;
+                GameManager.Instance.killCount += 1;
+                GameManager.Instance.GetExp(1);
             }
         }
 
-        private void Dead()
+        public void Dead()
         {
             GameManager.Instance.pool.DeSpawn(gameObject);
         }

@@ -19,19 +19,25 @@ namespace Managers
     {
         public GamePhase phase;
 
-        public float gameTime;
+        [Header("GAME INFO")] public float gameTime;
         public float maxGameTime = 2 * 10f;
         public int gameLevel = 0;
 
-        public PlayerController playerControl;
-        public PoolManager pool;
+        [Header("GAME OBJECT")] public PoolManager pool;
         public EnemyFactory enemyFactory;
         public RangeSensor2D recycleSensor;
 
-        public int[] levelTimeTableSec;
+        [Header("GAME DATA")] public int[] levelTimeTableSec;
         public GameObject[] gameInitPrefabs;
         public List<GameObject> runtimeGameObjects;
+        public int[] playerLevelUpExpTable = { 5, 15, 30, 60 };
 
+        [Header("PLAYER")] public PlayerController playerControl;
+
+        public int killCount;
+        public int playerExp;
+
+        [Header("EVENT")]
         public UnityEvent gameLevelUp;
 
 
@@ -87,6 +93,10 @@ namespace Managers
 
             base.OnDestroy();
         }
-        
+
+        public void GetExp(int exp)
+        {
+            playerExp += exp;
+        }
     }
 }

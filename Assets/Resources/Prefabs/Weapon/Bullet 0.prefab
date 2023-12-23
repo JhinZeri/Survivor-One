@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 11
+  force: 3
   attackFrequency: 1
   penetration: 0
   bodyRange: {fileID: 2746602898350483834}

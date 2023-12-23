@@ -32,7 +32,7 @@ namespace WeaponCodes
         public void ContactEnemy(GameObject enemyObj, Sensor sensor)
         {
             var enemy = enemyObj.GetComponent<EnemyController>();
-            enemy.UnderHit(damage);
+            enemy.UnderHit(damage,force);
             curPenetration--;
             if (curPenetration < 0)
             {
