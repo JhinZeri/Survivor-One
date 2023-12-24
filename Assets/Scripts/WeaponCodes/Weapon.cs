@@ -15,6 +15,6 @@ namespace WeaponCodes
 
         public int weaponLevel;
 
-        protected abstract void LevelUp();
+        public abstract void LevelUp();
     }
 }

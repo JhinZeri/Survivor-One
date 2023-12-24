@@ -52,11 +52,11 @@ namespace WeaponCodes
             }
         }
 
-        protected override void LevelUp()
+        public override void LevelUp()
         {
             weaponLevel += 1;
             count += 1;
-            weaponLevelUp?.Invoke();
+            ResetBulletShovel();
         }
     }
 }

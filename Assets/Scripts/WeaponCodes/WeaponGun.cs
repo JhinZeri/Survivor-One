@@ -54,9 +54,10 @@ namespace WeaponCodes
             bullet.Init(bulletSpeed, dir);
         }
 
-        protected override void LevelUp()
+        public override void LevelUp()
         {
-            throw new NotImplementedException();
+            weaponLevel += 1;
+           Debug.Log("Gun Level Up");
         }
     }
 }

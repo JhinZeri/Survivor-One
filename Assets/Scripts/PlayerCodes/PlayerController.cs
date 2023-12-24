@@ -3,6 +3,7 @@ using Managers;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using WeaponCodes;
 
 namespace PlayerCodes
 {
@@ -34,6 +35,8 @@ namespace PlayerCodes
         [Header("子物体")] public SpriteControl spriteControl;
 
         public SpriteRenderer shadow;
+
+        public Weapon[] Weapons;
 
         private void Awake()
         {
@@ -102,6 +105,14 @@ namespace PlayerCodes
                 {
                     playerState = PlayerStates.Idle;
                 }
+            }
+        }
+
+        public void WeaponLevelUp()
+        {
+            foreach (var weapon in Weapons)
+            {
+                weapon.weaponLevelUp?.Invoke();
             }
         }
     }

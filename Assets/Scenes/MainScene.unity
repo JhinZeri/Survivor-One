@@ -1971,7 +1971,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 460082513}
         m_TargetAssemblyTypeName: WeaponCodes.WeaponShovel, Assembly-CSharp
-        m_MethodName: ResetBulletShovel
+        m_MethodName: LevelUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1983,8 +1983,8 @@ MonoBehaviour:
         m_CallState: 2
   id: 0
   prefabId: 2
-  count: 0
-  weaponLevel: 0
+  count: 1
+  weaponLevel: 1
   rotateSpeedSec: 120
 --- !u!1 &460726562
 GameObject:
@@ -2622,6 +2622,9 @@ MonoBehaviour:
   moveVector2: {x: 0, y: 0}
   spriteControl: {fileID: 2098879641}
   shadow: {fileID: 421225424}
+  Weapons:
+  - {fileID: 460082513}
+  - {fileID: 1375350469}
 --- !u!50 &747766368
 Rigidbody2D:
   serializedVersion: 4
@@ -2713,7 +2716,19 @@ MonoBehaviour:
       m_Calls: []
   PlayerLevelUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 747766366}
+        m_TargetAssemblyTypeName: PlayerCodes.PlayerController, Assembly-CSharp
+        m_MethodName: WeaponLevelUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &938083005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,7 +3288,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponLevelUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1375350469}
+        m_TargetAssemblyTypeName: WeaponCodes.WeaponGun, Assembly-CSharp
+        m_MethodName: LevelUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   id: 1
   prefabId: 3
   count: 1
