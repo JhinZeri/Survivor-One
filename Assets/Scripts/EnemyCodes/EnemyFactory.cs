@@ -20,7 +20,7 @@ namespace EnemyCodes
 
         private void OnEnable()
         {
-            GameManager.Instance.gameLevelUp.AddListener(RefreshSpawnTimer);
+            GameManager.Instance.GameLevelUp.AddListener(RefreshSpawnTimer);
         }
 
 
@@ -29,7 +29,7 @@ namespace EnemyCodes
         {
             timer += Time.deltaTime;
 
-            if (timer >= spawnFrequencyTableSec[GameManager.Instance.gameLevel])
+            if (timer >= spawnFrequencyTableSec[GameManager.Instance.GameLevel])
             {
                 timer = 0f;
                 EnemySpawn();
@@ -48,7 +48,7 @@ namespace EnemyCodes
 
         private void EnemySpawn()
         {
-            var enemy = GameManager.Instance.pool.Spawn(GameManager.Instance.gameLevel, new Vector2(1000, 1000));
+            var enemy = GameManager.Instance.Pool.Spawn(GameManager.Instance.GameLevel, new Vector2(1000, 1000));
             enemy.SetActive(false);
             enemy.transform.SetParent(enemyParent);
             enemy.transform.position = RandomPosition();

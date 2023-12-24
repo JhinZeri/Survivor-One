@@ -49,7 +49,7 @@ namespace EnemyCodes
 
         void Start()
         {
-            phase = GameManager.Instance.phase;
+            phase = GameManager.Instance.Phase;
             // targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
         }
 
@@ -84,7 +84,7 @@ namespace EnemyCodes
         /// </summary>
         public void InitRecycle()
         {
-            targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
+            targetPlayer = GameManager.Instance.PlayerControl.GetComponent<Rigidbody2D>();
             DataInit();
         }
 
@@ -117,14 +117,14 @@ namespace EnemyCodes
                 m_coll.enabled = false;
                 m_rigid.simulated = false;
                 m_sprite.sortingOrder = 1;
-                GameManager.Instance.killCount += 1;
+                GameManager.Instance.KillCount += 1;
                 GameManager.Instance.GetExp(1);
             }
         }
 
         public void Dead()
         {
-            GameManager.Instance.pool.DeSpawn(gameObject);
+            GameManager.Instance.Pool.DeSpawn(gameObject);
         }
 
         /// <summary>
@@ -132,9 +132,9 @@ namespace EnemyCodes
         /// </summary>
         private void LockTarget()
         {
-            if (targetPlayer == null && GameManager.Instance.playerControl != null)
+            if (targetPlayer == null && GameManager.Instance.PlayerControl != null)
             {
-                targetPlayer = GameManager.Instance.playerControl.GetComponent<Rigidbody2D>();
+                targetPlayer = GameManager.Instance.PlayerControl.GetComponent<Rigidbody2D>();
             }
         }
 

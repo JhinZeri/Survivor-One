@@ -19,7 +19,7 @@ namespace WeaponCodes
             // 此时本地和世界坐标系一样，所以第二个参数不影响结果
             transform.Rotate(Vector3.back * (rotateSpeedSec * Time.deltaTime));
 
-            if (GameManager.Instance.phase == GamePhase.Dev)
+            if (GameManager.Instance.Phase == GamePhase.Dev)
             {
                 if (Keyboard.current.spaceKey.wasPressedThisFrame)
                 {
@@ -34,13 +34,13 @@ namespace WeaponCodes
             {
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    GameManager.Instance.pool.DeSpawn(transform.GetChild(i).gameObject);
+                    GameManager.Instance.Pool.DeSpawn(transform.GetChild(i).gameObject);
                 }
             }
 
             for (int index = 0; index < count; index++)
             {
-                var bullet = GameManager.Instance.pool.Spawn(prefabId).transform;
+                var bullet = GameManager.Instance.Pool.Spawn(prefabId).transform;
                 bullet.transform.SetParent(transform);
 
                 bullet.localPosition = Vector3.zero;

@@ -36,7 +36,7 @@ namespace WeaponCodes
             curPenetration--;
             if (curPenetration < 0)
             {
-                GameManager.Instance.pool.DeSpawn(gameObject);
+                GameManager.Instance.Pool.DeSpawn(gameObject);
                 curPenetration = penetration;
             }
         }
@@ -45,7 +45,7 @@ namespace WeaponCodes
         {
             if (Vector3.Distance(transform.position, Vector3.zero) >= 50)
             {
-                GameManager.Instance.pool.DeSpawn(gameObject);
+                GameManager.Instance.Pool.DeSpawn(gameObject);
                 curPenetration = penetration;
             }
         }

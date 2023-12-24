@@ -48,7 +48,7 @@ namespace WeaponCodes
             time = 0f;
             var targetPos = scanRange.GetNearestDetection().transform.position;
             var dir = (targetPos - transform.position).normalized;
-            var bullet = GameManager.Instance.pool.Spawn(prefabId, transform, transform.position)
+            var bullet = GameManager.Instance.Pool.Spawn(prefabId, transform, transform.position)
                 .GetComponent<BulletGun>();
             bullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
             bullet.Init(bulletSpeed, dir);

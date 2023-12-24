@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Utility;
 
-
 public enum GamePhase
 {
     Dev,
@@ -17,29 +16,28 @@ namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
-        public GamePhase phase;
+        public GamePhase Phase;
 
-        [Header("GAME INFO")] public float gameTime;
-        public float maxGameTime = 2 * 10f;
-        public int gameLevel = 0;
+        [Header("GAME INFO")] public float GameTime;
+        public float MaxGameTime = 2 * 10f;
+        public int GameLevel;
 
-        [Header("GAME OBJECT")] public PoolManager pool;
-        public EnemyFactory enemyFactory;
-        public RangeSensor2D recycleSensor;
+        [Header("GAME OBJECT")] public PoolManager Pool;
+        public EnemyFactory EnemyFactory;
+      //  public RangeSensor2D RecycleSensor;
 
-        [Header("GAME DATA")] public int[] levelTimeTableSec;
-        public GameObject[] gameInitPrefabs;
-        public List<GameObject> runtimeGameObjects;
-        public int[] playerLevelUpExpTable = { 5, 15, 30, 60 };
+        [Header("GAME DATA")] public int[] LevelTimeTableSec ;
+        public GameObject[] GameInitPrefabs;
+        public List<GameObject> RuntimeGameObjects;
+        public int[] PlayerLevelUpExpTable = { 5, 15, 30, 60 };
 
-        [Header("PLAYER")] public PlayerController playerControl;
+        [Header("PLAYER")] public PlayerController PlayerControl;
+        public int CurLevel;
+        public int KillCount;
+        public float PlayerExp;
 
-        public int killCount;
-        public int playerExp;
-
-        [Header("EVENT")]
-        public UnityEvent gameLevelUp;
-
+        [Header("EVENT")] public UnityEvent GameLevelUp;
+        public UnityEvent PlayerLevelUp;
 
         protected override void Awake()
         {
@@ -50,53 +48,47 @@ namespace Managers
 
         private void Update()
         {
-            gameTime += Time.deltaTime;
+            GameTime += Time.deltaTime;
 
-            if (gameTime >= levelTimeTableSec[Mathf.Min(gameLevel + 1, 1)])
+            if (GameTime >= LevelTimeTableSec[Mathf.Min(GameLevel + 1, 1)])
             {
-                if (gameLevel < 1)
-                {
-                    gameLevelUp?.Invoke();
-                }
+                if (GameLevel < 1) GameLevelUp?.Invoke();
 
-                gameLevel = 1;
+                GameLevel = 1;
             }
             else
             {
-                gameLevel = 0;
+                GameLevel = 0;
             }
 
 
-            if (gameTime >= maxGameTime)
-            {
-                Debug.Log("Game Over");
-            }
+            if (GameTime >= MaxGameTime) Debug.Log("Game Over");
 
             // gameLevel = Mathf.Min(Mathf.FloorToInt(gameTime / 10), 1);
         }
 
-        private void GameInit()
-        {
-            GameObject enemyFactoryObj = Instantiate(gameInitPrefabs[0], null);
-            enemyFactory = enemyFactoryObj.GetComponent<EnemyFactory>();
-            runtimeGameObjects.Add(enemyFactoryObj);
-        }
-
         protected override void OnDestroy()
         {
-            foreach (var obj in runtimeGameObjects)
-            {
-                Destroy(obj);
-            }
+            foreach (var obj in RuntimeGameObjects) Destroy(obj);
 
-            gameLevelUp.RemoveAllListeners();
+            GameLevelUp.RemoveAllListeners();
 
             base.OnDestroy();
         }
 
+        private void GameInit()
+        {
+            var enemyFactoryObj = Instantiate(GameInitPrefabs[0], null);
+            EnemyFactory = enemyFactoryObj.GetComponent<EnemyFactory>();
+            RuntimeGameObjects.Add(enemyFactoryObj);
+        }
+
         public void GetExp(int exp)
         {
-            playerExp += exp;
+            PlayerExp += exp;
+            if (PlayerExp < PlayerLevelUpExpTable[CurLevel - 1]) return;
+            PlayerExp = 0;
+            PlayerLevelUp?.Invoke();
         }
     }
 }
